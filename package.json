@@ -9,7 +9,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
-    "node": "^17.7.1"
+    "node": "^17.7.1",
+    "nodemon": "^2.0.15"
   },
   "repository": {
     "type": "git",

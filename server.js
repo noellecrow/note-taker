@@ -5,9 +5,8 @@ const path = require('path');
 // Variable for Express
 const app = express();
 // Define a port to listen for
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
-const allNotes = require('./db/db.json');
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -16,8 +15,19 @@ app.use(express.static('public'));
 
 // Setting routes for APIs
 app.get('/api/notes', (req, res) => {
-    res.json(allNotes.slice(1));
+
+fs.readFile('./db/db.json', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err);
+    } else {
+        console.log(data);
+        res.json(JSON.parse(data));
+
+    }
+})
 });
+
+
 
 
 app.get('/', (req, res) => {
@@ -54,8 +64,15 @@ function createNewNote(body, notesArray) {
 }
 
 app.post('/api/notes', (req, res) => {
-    const newNote = createNewNote(req.body, allNotes);
-    res.json(newNote);
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            const newNote = createNewNote(req.body, data);
+            res.json(newNote);
+        }
+    })
+
 });
 
 // Function to delete notes
