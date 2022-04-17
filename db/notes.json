@@ -1,8 +1,3 @@
-[
-  1,
-  {
-    "title": "Homework",
-    "text": "take notes",
-    "id": 0
-  }
-]
+{
+  "notesArray": []
+}
